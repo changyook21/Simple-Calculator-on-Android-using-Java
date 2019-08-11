@@ -145,14 +145,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                TextView resultTextView = findViewById(R.id.resultTextView);
                 if (firstBool) {
                     firstInput = Double.parseDouble(screen.toString());
                 }
                 firstBool = true;
-
-
-
 
                 screen = new StringBuilder();
             }
@@ -174,5 +170,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnReset = findViewById(R.id.BtnReset);
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                resultTextView.setText("0");
+                answer = 0.0;
+                firstInput = 0.0;
+                secondInput = 0.0;
+                firstBool = true;
+                screen = new StringBuilder();
+            }
+        });
     }
 }
