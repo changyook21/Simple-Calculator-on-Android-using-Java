@@ -9,9 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     double answer = 0.0;
-    double add1 = 0.0;
-    double add2 = 0.0;
-    StringBuilder input1 = new StringBuilder();
+    double firstInput = 0.0;
+    double secondInput = 0.0;
+    boolean firstBool = true;
+    StringBuilder screen = new StringBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("0");
+                screen.append("0");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -35,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("1");
+                screen.append("1");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -47,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("2");
+                screen.append("2");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -59,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("3");
+                screen.append("3");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -71,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("4");
+                screen.append("4");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -83,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("5");
+                screen.append("5");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -95,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("6");
+                screen.append("6");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -107,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("7");
+                screen.append("7");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -119,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("8");
+                screen.append("8");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -131,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                input1.append("9");
+                screen.append("9");
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                resultTextView.setText(input1);
+                resultTextView.setText(screen);
             }
         });
 
@@ -145,8 +146,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 TextView resultTextView = findViewById(R.id.resultTextView);
-                add1 = Double.parseDouble(input1.toString());
-                input1 = new StringBuilder();
+                if (firstBool) {
+                    firstInput = Double.parseDouble(screen.toString());
+                }
+                firstBool = true;
+
+
+
+
+                screen = new StringBuilder();
             }
         });
 
@@ -159,9 +167,10 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView resultTextView = findViewById(R.id.resultTextView);
 
-                add2 = Double.parseDouble(input1.toString());
-                add1 += add2;
-                resultTextView.setText(Double.toString(add1));
+                secondInput = Double.parseDouble(screen.toString());
+                firstInput += secondInput;
+                resultTextView.setText(Double.toString(firstInput));
+                firstBool = false;
             }
         });
 
