@@ -12,6 +12,13 @@ public class MainActivity extends AppCompatActivity {
     double firstInput = 0.0;
     double secondInput = 0.0;
     boolean firstBool = true;
+
+    boolean add = false;
+    boolean substraction = false;
+    boolean division = false;
+    boolean multiplication = false;
+    boolean dot = false;
+
     StringBuilder screen = new StringBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +151,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
+                if (screen.length() == 0) {
+                    return;
+                }
+                add = true;
                 if (firstBool) {
                     firstInput = Double.parseDouble(screen.toString());
                 }
@@ -154,19 +164,165 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnMin = findViewById(R.id.BtnMin);
+
+        btnMin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                substraction = true;
+                if (firstBool) {
+                    firstInput = Double.parseDouble(screen.toString());
+                }
+                firstBool = true;
+
+                screen = new StringBuilder();
+            }
+        });
+
+        Button btnMult = findViewById(R.id.BtnMult);
+
+        btnMult.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                multiplication = true;
+                if (firstBool) {
+                    firstInput = Double.parseDouble(screen.toString());
+                }
+                firstBool = true;
+
+                screen = new StringBuilder();
+            }
+        });
+
+        Button btnDiv = findViewById(R.id.BtnDiv);
+
+        btnDiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                division = true;
+                if (firstBool) {
+                    firstInput = Double.parseDouble(screen.toString());
+                }
+                firstBool = true;
+
+                screen = new StringBuilder();
+            }
+        });
+
+        Button btnSqr = findViewById(R.id.BtnSqr);
+
+        btnSqr.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                firstInput = Math.sqrt(Double.parseDouble(screen.toString()));
+                resultTextView.setText(Double.toString(firstInput));
+                firstBool = false;
+            }
+        });
+
+        Button btnMod = findViewById(R.id.BtnMod);
+
+        btnMod.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                firstInput = 0.01 * Double.parseDouble(screen.toString());
+                resultTextView.setText(Double.toString(firstInput));
+                firstBool = false;
+            }
+        });
+
+        Button btnFrac = findViewById(R.id.BtnFrac);
+
+        btnFrac.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                firstInput = 1 / Double.parseDouble(screen.toString());
+                resultTextView.setText(Double.toString(firstInput));
+                firstBool = false;
+            }
+        });
+
+        Button btnLog = findViewById(R.id.BtnLog);
+
+        btnLog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                firstInput = Math.log10(Double.parseDouble(screen.toString()));
+                resultTextView.setText(Double.toString(firstInput));
+                firstBool = false;
+            }
+        });
+
         Button btnEqual = findViewById(R.id.BtnEqual);
 
         btnEqual.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+                if (screen.length() == 0) {
+                    return;
+                }
 
                 TextView resultTextView = findViewById(R.id.resultTextView);
-
                 secondInput = Double.parseDouble(screen.toString());
-                firstInput += secondInput;
-                resultTextView.setText(Double.toString(firstInput));
+                if (add) {
+                    add = false;
+                    firstInput += secondInput;
+                    resultTextView.setText(Double.toString(firstInput));
+                }
+
+                if (substraction) {
+                    substraction = false;
+                    firstInput -= secondInput;
+                    resultTextView.setText(Double.toString(firstInput));
+                }
+
+                if (multiplication) {
+                    multiplication = false;
+                    firstInput *= secondInput;
+                    resultTextView.setText(Double.toString(firstInput));
+                }
+
+                if (division) {
+                    division = false;
+                    firstInput /= secondInput;
+                    resultTextView.setText(Double.toString(firstInput));
+                }
+
                 firstBool = false;
+                dot = true;
             }
         });
 
@@ -183,6 +339,11 @@ public class MainActivity extends AppCompatActivity {
                 firstInput = 0.0;
                 secondInput = 0.0;
                 firstBool = true;
+                add = false;
+                substraction = false;
+                division = false;
+                multiplication = false;
+                dot = false;
                 screen = new StringBuilder();
             }
         });
@@ -193,10 +354,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
+                if (dot) {
+                    return;
+                }
                 TextView resultTextView = findViewById(R.id.resultTextView);
                 screen.append(".");
                 resultTextView.setText(screen);
+                dot = true;
+
             }
         });
         Button btnMinus = findViewById(R.id.BtnMinus);
@@ -225,8 +390,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 TextView resultTextView = findViewById(R.id.resultTextView);
+
+                if (resultTextView.getText().length() == 1) {
+                    resultTextView.setText("0");
+                    return;
+
+                }
                 StringBuilder temp = new StringBuilder(resultTextView.getText());
+                if (temp.charAt(temp.length() - 1) == '.') {
+                    dot = false;
+                }
                 temp.deleteCharAt(temp.length() - 1);
                 resultTextView.setText(temp);
                 firstInput = Double.parseDouble(temp.toString());
