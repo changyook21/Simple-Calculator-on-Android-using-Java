@@ -186,5 +186,18 @@ public class MainActivity extends AppCompatActivity {
                 screen = new StringBuilder();
             }
         });
+
+        Button btnDot = findViewById(R.id.BtnDot);
+
+        btnDot.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                screen.append(".");
+                resultTextView.setText(screen);
+            }
+        });
     }
 }
