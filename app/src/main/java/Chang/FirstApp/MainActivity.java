@@ -199,5 +199,24 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText(screen);
             }
         });
+        Button btnMinus = findViewById(R.id.BtnMinus);
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                TextView resultTextView = findViewById(R.id.resultTextView);
+
+                firstInput *= -1;
+
+                screen = new StringBuilder(resultTextView.getText());
+                double current = Double.parseDouble(screen.toString());
+                current *= -1;
+                screen = new StringBuilder(Double.toString(current));
+                resultTextView.setText(screen);
+            }
+        });
     }
+
 }
