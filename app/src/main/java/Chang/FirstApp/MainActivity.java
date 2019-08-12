@@ -217,6 +217,21 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText(screen);
             }
         });
+
+        Button btnBack = findViewById(R.id.BtnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                TextView resultTextView = findViewById(R.id.resultTextView);
+                StringBuilder temp = new StringBuilder(resultTextView.getText());
+                temp.deleteCharAt(temp.length() - 1);
+                resultTextView.setText(temp);
+                firstInput = Double.parseDouble(temp.toString());
+            }
+        });
     }
 
 }
